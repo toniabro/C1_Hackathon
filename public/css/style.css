@@ -34,6 +34,14 @@
   position: relative;
 }
 
+.popup-close {
+  padding-top: 2%;
+  padding-right: 2%;
+  position:absolute;
+  top:0;
+  right:0;
+}
+
 input {
   margin: 20px auto;
   display: block;
