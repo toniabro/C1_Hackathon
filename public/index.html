@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Welcome to Firebase Hosting</title>
+    <title>Calculator</title>
 
     <!-- update the version number as needed -->
     <script defer src="https://www.gstatic.com/firebasejs/7.17.2/firebase-app.js"></script>
@@ -23,6 +23,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
     <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    
   </head>
 
   <body>
@@ -76,15 +77,93 @@
     <div class="section no-pad-bot" id="index-banner">
       <div class="container">
         <br><br>
-        <h1 class="header center orange-text">Sample Text</h1>
+        <h1 class="header center orange-text">Investing Simplified</h1>
         <div class="row center">
-          <h5 class="header col s12 light">Description</h5>
+          <h5 class="header col s12 light">See how you can let your money do the work now, so you can cash in later.</h5>
+          <!-- <br><br>
+          <p>
+            What is investing?
+            Investing is a great and easy way to store some money away and let it grow over time. There are a bunch of different ways to invest your money like stocks, mutual funds, and bonds. If you don’t know what those are, that is okay! Stocks are like shares or a very small part ownership of a company. Mutual funds are a collection of stocks grouped together into one portfolio. Bonds are a loan to a company or the government that pays you back at a constant, usually lower, rate. Any of these options can grow your money in incredible ways if you give it enough time.
+            Check out our interactive graph below to see it for yourself.
+          </p> -->
         </div>
         <br><br>
   
       </div>
-    </div>
-  
+      <div class="container">
+        <h5 class="header col s12 light">What is your projected return?</h5>
+
+        <div class="row">
+          <form class="col s12">
+            <div class="row">
+              <div class="input-field col s12">
+                <i class="material-icons prefix">attach_money</i>
+                <textarea id="textarea1" class="materialize-textarea"></textarea>
+                <label for="textarea1">Amount Invested</label>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <form action="#">
+          <p>
+            Saving
+          </p>
+          <p>
+            <label>
+              <input type="checkbox" />
+              <span>Low Interest Savings Account</span>
+            </label>
+          </p>
+          <p>
+            <label>
+              <input type="checkbox" />
+              <span>Cash</span>
+            </label>
+          </p>
+          <p>
+            Investing
+          </p>
+          <p>
+            <label>
+              <input type="checkbox" />
+              <span>Low Risk - 3%</span>
+            </label>
+          </p>
+          <p>
+            <label>
+              <input type="checkbox" />
+              <span>Mid/Low Risk - 5%</span>
+            </label>
+          </p>
+          <p>
+            <label>
+              <input type="checkbox"  />
+              <span>Mid Risk - 7%</span>
+            </label>
+          </p>
+          <p>
+            <label>
+              <input type="checkbox" />
+              <span>Mid/High Risk - 9%</span>
+            </label>
+          </p>
+          <p>
+            <label>
+              <input type="checkbox" />
+              <span>High Risk - 10%</span>
+            </label>
+          </p>
+        </form>
+      </div>
+
+     <div class="section no-pad-bot" id="index-banner">
+      <div class="container">
+        <h1 class="header center orange-text">Graph goes here</h1>
+        </div>
+        </div>
+        <br><br>
+
     <footer class="page-footer orange">
       <div class="container">
         <div class="row">
@@ -92,6 +171,11 @@
             <h5 class="white-text">Footer</h5>
             <p class="grey-text text-lighten-4">Sample text.</p>
           </div>
+        </div>
+      </div>
+      <div class="footer-copyright">
+        <div class="container">
+        <a class="orange-text text-lighten-3" href="#">Extra link</a>
         </div>
       </div>
     </footer>
