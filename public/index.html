@@ -60,21 +60,44 @@
     </div>
 
     <script>
+      // Script for the login-popup logic as well as firebase user auth
       document.getElementById("button").addEventListener("click", function(){
+        firebase.auth().signOut().then(function() {
+          // Sign-out successful.
+        }).catch(function(error) {
+          // An error happened.
+        });
         document.querySelector(".popup").style.display = "flex";
         document.getElementById("login_button").addEventListener("click", function() {
-          console.log(document.getElementById("email").value);
-          console.log(document.getElementById("password"));
-          //let username = document.getElementById("email");
-          //let password = document.getElementById("password");
-          // firebase.auth().signInWithEmailAndPassword(username, password) 
-          // .catch(function(error) {
-          //   // Handle Errors here.
-          //   var errorCode = error.code;
-          //   var errorMessage = error.message;
-          // });
+          let username = document.getElementById("email").value;
+          let password = document.getElementById("password").value;
+          firebase.auth().signInWithEmailAndPassword(username, password) 
+          .catch(function(error) {
+            // Handle Errors here.
+            var errorCode = error.code;
+            var errorMessage = error.message;
+          });
+
+          
+
         })
+        firebase.auth().onAuthStateChanged(function(user) {
+            var email, uid;
+            if (user) {
+              console.log("User is signed in");
+              email = user.email;
+              uid = user.uid; // The user's ID, unique to the Firebase project. Do NOT use
+                            // this value to authenticate with your backend server, if
+                            // you have one. Use User.getToken() instead.
+              console.log(email);
+              console.log(uid);
+            } else {
+              console.log("No user is signed in");
+            }
+          });
       })
+
+      
     </script>
 
     <div class="section no-pad-bot" id="index-banner">
