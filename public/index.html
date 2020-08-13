@@ -12,7 +12,7 @@
     <script defer src="https://www.gstatic.com/firebasejs/7.17.2/firebase-database.js"></script>
     
     <!-- initialize the SDK after all desired features are loaded -->
-    <script defer src="./init-firebase.js"></script>
+    <script defer src="./js/init-firebase.js"></script>
 
     <!-- Materialize stuff -->
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -35,14 +35,6 @@
         firebase.database().ref('/path/to/ref').on('value', snapshot => { });
         //firebase.messaging().requestPermission().then(() => { });
         //firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
-        try {
-          let app = firebase.app();
-          let features = ['auth', 'database'/*, 'messaging', 'storage'*/].filter(feature => typeof app[feature] === 'function');
-          document.getElementById('load').innerHTML = `Firebase SDK loaded with ${features.join(', ')}`;
-        } catch (e) {
-          console.error(e);
-          document.getElementById('load').innerHTML = 'Error loading the Firebase SDK, check the console.';
-        }
       });
     </script>
 
@@ -50,11 +42,36 @@
     <nav class="light-blue lighten-1" role="navigation">
       <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Logo</a>
         <ul class="right hide-on-med-and-down">
-          <li><a href="#">Login</a></li>
+          <li><a href="#" class="button" id="button">Login</a></li>
         </ul>
       </div>
     </nav>
 
+    <div class="popup">
+      <div class="popup-content">
+        <input type="text" placeholder="Email" id="email">
+        <input type="password" placeholder="Password" id="password">
+        <a href="#" class="button" id="login_button">Login</a>
+      </div>
+    </div>
+
+    <script>
+      document.getElementById("button").addEventListener("click", function(){
+        document.querySelector(".popup").style.display = "flex";
+        document.getElementById("login_button").addEventListener("click", function() {
+          console.log(document.getElementById("email").value);
+          console.log(document.getElementById("password"));
+          //let username = document.getElementById("email");
+          //let password = document.getElementById("password");
+          // firebase.auth().signInWithEmailAndPassword(username, password) 
+          // .catch(function(error) {
+          //   // Handle Errors here.
+          //   var errorCode = error.code;
+          //   var errorMessage = error.message;
+          // });
+        })
+      })
+    </script>
 
     <div class="section no-pad-bot" id="index-banner">
       <div class="container">
