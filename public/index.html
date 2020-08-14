@@ -36,6 +36,7 @@
         firebase.database().ref('/path/to/ref').on('value', snapshot => { });
         //firebase.messaging().requestPermission().then(() => { });
         //firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
+        document.getElementById('logout').style.display = 'none'; 
       });
     </script>
 
@@ -66,6 +67,29 @@
       document.querySelector(".popup").style.display = "none";
       });
     </script>
+
+<!-- <script>
+  //Hides logout/login buttons on page load
+        document.addEventListener("DOMContentLoaded", function(){  
+          firebase.auth().onAuthStateChanged(function(user) {
+            var email, uid;
+            if (user) {
+              console.log("User is signed in");
+              document.getElementById('login').style.display = 'none'; 
+              document.getElementById('logout').style.display = 'none'; 
+              email = user.email;
+              uid = user.uid; // The user's ID, unique to the Firebase project. Do NOT use
+                            // this value to authenticate with your backend server, if
+                            // you have one. Use User.getToken() instead.
+            } else {
+              console.log("No user is signed in");
+              document.getElementById('login').style.display = 'none'; 
+              document.getElementById('logout').style.display = 'none'; 
+            }
+        });
+
+</script> -->
+
     <script>
       // Script for the login-popup logic as well as firebase user auth
       document.getElementById("login").addEventListener("click", function(){  // Log out
@@ -93,7 +117,8 @@
             if (user) {
               console.log("User is signed in");
               document.querySelector(".popup").style.display = "none";
-              document.getElementById('login').style.visibility = 'hidden'; 
+              document.getElementById('login').style.display = 'none'; 
+              document.getElementById('logout').style.display = ''; 
               email = user.email;
               uid = user.uid; // The user's ID, unique to the Firebase project. Do NOT use
                             // this value to authenticate with your backend server, if
@@ -102,7 +127,8 @@
               console.log(uid);
             } else {
               console.log("No user is signed in");
-              document.getElementById('logout').style.visibility = 'hidden'; 
+              document.getElementById('logout').style.display = ''; 
+              document.getElementById('login').style.display = 'none'; 
             }
           });
       })
