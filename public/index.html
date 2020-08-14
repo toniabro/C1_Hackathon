@@ -228,6 +228,103 @@
      <div class="section no-pad-bot" id="index-banner">
       <div class="container">
         <h1 class="header center orange-text">Graph goes here</h1>
+        
+        <div class="chart_container" style="display: inline-block;">
+		      <canvas id="myChart" width="600px" height="400px"></canvas>
+	      </div>
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+
+	<script>
+
+			var ctx = document.getElementById('myChart').getContext('2d');
+
+			var balances = [];
+			var index = 0;
+			while (balances.length != 56) {
+				balances[index] = (1.1**index).toFixed(2);
+				index++;
+			}
+
+			var balances2 = [];
+			var index2 = 0;
+			while (balances2.length != 56) {
+				balances2[index2] = (1.4**index2).toFixed(2);
+				index2++;
+			}
+
+			var chart = new Chart(ctx, {
+		        type: 'line',
+		        data: {
+		            labels: ["2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030", "2031", "2032", "2033",	 "2034", "2035", "2036", "2037", "2038", "2039", "2040", "2041", "2042", "2043", "2044", "2045", "2046", "2047",
+		            		 "2048", "2049", "2050", "2051", "2052", "2053", "2054", "2055", "2056", "2057", "2058", "2059", "2060", "2061",
+		            		 "2062", "2063", "2064", "2065", "2066", "2067", "2068", "2069", "2070", "2071", "2072", "2073", "2074", "2075"],
+		            datasets: [{
+		                label: "Value ($)",
+		                borderColor: 'rgb(55,95,65)',
+		                fill: false,
+		                data: balances,
+		            }]
+		        },
+
+		        options: {
+
+		        	tooltips: {
+		        	      mode: 'index',
+		        	      intersect: false
+		        	   },
+		        	   hover: {
+		        	      mode: 'index',
+		        	      intersect: false
+		        	   },
+
+		        	title: {
+		        	    	display: true,
+		        	    	text: 'Growth of Portfolio',
+		        	    	fontSize: 22,
+		        	    	fontColor: 'black',
+		        	    	fontStyle: 'bold',
+
+		        	    },
+		        	responsive: false,
+		        	legend: {
+		  				display: false,
+		        	},
+		        	scales: {
+		        	    xAxes: [{
+		        	      scaleLabel: {
+		        	        display: true,
+		        	        labelString: 'Year',
+		        	        fontSize: 16,
+		        	        fontColor: 'black',
+		        	        fontStyle: 'bold',
+		        	      },
+		        	      ticks: {
+		        	      	fontSize: 14,
+		        	      	fontColor: 'black',
+		        	      }
+		        	    }],
+		        	    yAxes: [{
+		        	      scaleLabel: {
+		        	        display: true,
+		        	        labelString: 'Value ($)',
+		        	        fontSize: 16,
+		        	        fontColor: 'black',
+		        	        fontStyle: 'bold',
+		        	      },
+		        	      ticks: {
+		        	      	fontSize: 14,
+		        	      	fontColor: 'black',
+		        	      }
+		        	    }],
+		        	  } 
+		        }
+
+		    });
+	
+	</script>
+
+        
         </div>
         </div>
         <br><br>
