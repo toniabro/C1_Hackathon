@@ -1,237 +1,210 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Calculator</title>
 
-    <!-- update the version number as needed -->
-    <script defer src="https://www.gstatic.com/firebasejs/7.17.2/firebase-app.js"></script>
-    <!-- include only the Firebase features as you need -->
-    <script defer src="https://www.gstatic.com/firebasejs/7.17.2/firebase-auth.js"></script>
-    <script defer src="https://www.gstatic.com/firebasejs/7.17.2/firebase-database.js"></script>
-    
-    <!-- initialize the SDK after all desired features are loaded -->
-    <script defer src="./js/init-firebase.js"></script>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Calculator</title>
 
-    <!-- Materialize stuff -->
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
-    <title>Starter Template - Materialize</title>
-  
-    <!-- CSS  -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-    <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-    
-  </head>
+  <!-- update the version number as needed -->
+  <script defer src="https://www.gstatic.com/firebasejs/7.17.2/firebase-app.js"></script>
+  <!-- include only the Firebase features as you need -->
+  <script defer src="https://www.gstatic.com/firebasejs/7.17.2/firebase-auth.js"></script>
+  <script defer src="https://www.gstatic.com/firebasejs/7.17.2/firebase-database.js"></script>
 
-  <body>
+  <!-- initialize the SDK after all desired features are loaded -->
+  <script defer src="./js/init-firebase.js"></script>
 
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        // The Firebase SDK is initialized and available here!
-        
-        firebase.auth().onAuthStateChanged(user => { });
-        firebase.database().ref('/path/to/ref').on('value', snapshot => { });
-        //firebase.messaging().requestPermission().then(() => { });
-        //firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
-        document.getElementById('logout').style.display = 'none'; 
-      });
-    </script>
+  <!-- Materialize stuff -->
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
+  <title>Starter Template - Materialize</title>
 
-    <!-- Nav bar -->
-    <nav class="light-blue lighten-1" role="navigation">
-      <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Logo</a>
-        <ul class="right">
-          <li><a href="#" class="login" id="login">Login</a></li>
-          <li><a href="#" class="logout" id="logout">Log Out</a></li>
-        </ul>
-      </div>
-    </nav>
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
+  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
 
-    <div class="popup">
-      <div class="popup-content">
-        <h5><b>Login</b></h5>
-        <div class="popup-close"><a class="btn-floating waves-effect red"><i class="material-icons" id="close">close</i></a></div>
-        <input type="text" placeholder="Email" id="email">
-        <input type="password" placeholder="Password" id="password">
-        <br>
-        <a class="waves-effect waves-light btn" id="login_button">Login</a>
-        <!-- <a href="#" class="button" id="login_button">Login</a> -->
-      </div>
+</head>
+
+<body>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // The Firebase SDK is initialized and available here!
+
+      firebase.auth().onAuthStateChanged(user => { });
+      firebase.database().ref('/path/to/ref').on('value', snapshot => { });
+      //firebase.messaging().requestPermission().then(() => { });
+      //firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
+      document.getElementById('logout').style.display = 'none';
+    });
+  </script>
+
+  <!-- Nav bar -->
+  <nav class="light-blue lighten-1" role="navigation">
+    <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Logo</a>
+      <ul class="right">
+        <li><a href="#" class="login" id="login">Login</a></li>
+        <li><a href="#" class="logout" id="logout">Log Out</a></li>
+      </ul>
     </div>
+  </nav>
 
-    <script>
-      document.getElementById("close").addEventListener("click", function(){  // Log out
+  <div class="popup">
+    <div class="popup-content">
+      <h5><b>Login</b></h5>
+      <div class="popup-close"><a class="btn-floating waves-effect red"><i class="material-icons"
+            id="close">close</i></a></div>
+      <input type="text" placeholder="Email" id="email">
+      <input type="password" placeholder="Password" id="password">
+      <small style="color:red" id="login-error-message">Incorrect Login Credentials</small>
+      <br>
+      <a class="waves-effect waves-light btn" id="login_button">Login</a>
+      <!-- <a href="#" class="button" id="login_button">Login</a> -->
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("close").addEventListener("click", function () {  // close pop-up window
       document.querySelector(".popup").style.display = "none";
+    });
+
+    document.getElementById("logout").addEventListener("click", function () { // listener for logout
+      firebase.auth().signOut().then(function () { //sign out and print to console
+        console.log("Sign out successful");
+        document.getElementById('logout').style.display = 'none';
+        document.getElementById('login').style.display = '';
+      }).catch(function (error) {
+        console.log(error);
       });
-    </script>
+    })
 
-<!-- <script>
-  //Hides logout/login buttons on page load
-        document.addEventListener("DOMContentLoaded", function(){  
-          firebase.auth().onAuthStateChanged(function(user) {
-            var email, uid;
-            if (user) {
-              console.log("User is signed in");
-              document.getElementById('login').style.display = 'none'; 
-              document.getElementById('logout').style.display = 'none'; 
-              email = user.email;
-              uid = user.uid; // The user's ID, unique to the Firebase project. Do NOT use
-                            // this value to authenticate with your backend server, if
-                            // you have one. Use User.getToken() instead.
-            } else {
-              console.log("No user is signed in");
-              document.getElementById('login').style.display = 'none'; 
-              document.getElementById('logout').style.display = 'none'; 
-            }
+    document.getElementById("login").addEventListener("click", function () { //listener for login UI
+      document.getElementById('login-error-message').style.display = 'none'; //hide login error message
+      document.querySelector(".popup").style.display = "flex"; //render popup screen
+      document.getElementById("login_button").addEventListener("click", function () { //listener for final login button
+        let username = document.getElementById("email").value;
+        let password = document.getElementById("password").value;
+        firebase.auth().signInWithEmailAndPassword(username, password).then(function () {
+          var user = firebase.auth().currentUser;
+
+          console.log("Sign in Successful");
+          document.querySelector(".popup").style.display = "none";
+          document.getElementById('login').style.display = 'none';
+          document.getElementById('logout').style.display = '';
+          email = user.email;
+          uid = user.uid; // The user's ID, unique to the Firebase project. Do NOT use
+          // this value to authenticate with your backend server, if
+          // you have one. Use User.getToken() instead.
+          console.log(email);
+          console.log(uid);
+        }).catch(function (error) {
+          console.log(error);
+          document.getElementById('login-error-message').style.display = ''; //show login error message
+          document.getElementById('logout').style.display = 'none';
+          document.getElementById('login').style.display = '';
         });
-
-</script> -->
-
-    <script>
-      // Script for the login-popup logic as well as firebase user auth
-      document.getElementById("login").addEventListener("click", function(){  // Log out
-        firebase.auth().signOut().then(function() {
-          // Sign-out successful.
-        }).catch(function(error) {
-          // An error happened.
-        });
-        document.querySelector(".popup").style.display = "flex";
-        document.getElementById("login_button").addEventListener("click", function() {
-          let username = document.getElementById("email").value;
-          let password = document.getElementById("password").value;
-          firebase.auth().signInWithEmailAndPassword(username, password) 
-          .catch(function(error) {
-            // Handle Errors here.
-            var errorCode = error.code;
-            var errorMessage = error.message;
-          });
-
-          
-
-        })
-        firebase.auth().onAuthStateChanged(function(user) {
-            var email, uid;
-            if (user) {
-              console.log("User is signed in");
-              document.querySelector(".popup").style.display = "none";
-              document.getElementById('login').style.display = 'none'; 
-              document.getElementById('logout').style.display = ''; 
-              email = user.email;
-              uid = user.uid; // The user's ID, unique to the Firebase project. Do NOT use
-                            // this value to authenticate with your backend server, if
-                            // you have one. Use User.getToken() instead.
-              console.log(email);
-              console.log(uid);
-            } else {
-              console.log("No user is signed in");
-              document.getElementById('logout').style.display = ''; 
-              document.getElementById('login').style.display = 'none'; 
-            }
-          });
       })
+    });
+  </script>
 
-      
-    </script>
-
-    <div class="section no-pad-bot" id="index-banner">
-      <div class="container">
-        <br><br>
-        <h1 class="header center orange-text">Investing Simplified</h1>
-        <div class="row center">
-          <h5 class="header col s12 light">See how you can let your money do the work now, so you can cash in later.</h5>
-          <!-- <br><br>
+  <div class="section no-pad-bot" id="index-banner">
+    <div class="container">
+      <br><br>
+      <h1 class="header center orange-text">Investing Simplified</h1>
+      <div class="row center">
+        <h5 class="header col s12 light">See how you can let your money do the work now, so you can cash in later.</h5>
+        <!-- <br><br>
           <p>
             What is investing?
             Investing is a great and easy way to store some money away and let it grow over time. There are a bunch of different ways to invest your money like stocks, mutual funds, and bonds. If you don’t know what those are, that is okay! Stocks are like shares or a very small part ownership of a company. Mutual funds are a collection of stocks grouped together into one portfolio. Bonds are a loan to a company or the government that pays you back at a constant, usually lower, rate. Any of these options can grow your money in incredible ways if you give it enough time.
             Check out our interactive graph below to see it for yourself.
           </p> -->
-        </div>
-        <br><br>
-  
       </div>
-      <div class="container">
-        <h5 class="header col s12 light">What is your projected return?</h5>
+      <br><br>
 
-        <div class="row">
-          <form class="col s12" action="#">
-            <div class="row">
-              <div class="input-field inline">
-                <i class="material-icons prefix">attach_money</i>
-                <textarea id="textarea1" class="materialize-textarea"></textarea>
-                <label for="textarea1">Initial Investment</label>
-              </div>
-            </div>
-            <div class="row">
-              <div class="input-field inline">
-                <i class="material-icons prefix">attach_money</i>
-                <textarea id="textarea1" class="materialize-textarea"></textarea>
-                <label for="textarea1">Monthly Contribution</label>
-              </div>
-            </div>
-          </form>
-        </div>
+    </div>
+    <div class="container">
+      <h5 class="header col s12 light">What is your projected return?</h5>
 
-        <form action="#">
-          <p>
-            Saving
-          </p>
-          <p>
-            <label>
-              <input type="checkbox" />
-              <span>Low Interest Savings Account</span>
-            </label>
-          </p>
-          <p>
-            <label>
-              <input type="checkbox" />
-              <span>Cash</span>
-            </label>
-          </p>
-          <p>
-            Investing
-          </p>
-          <p>
-            <label>
-              <input type="checkbox" />
-              <span>Low Risk - 3%</span>
-            </label>
-          </p>
-          <p>
-            <label>
-              <input type="checkbox" />
-              <span>Mid/Low Risk - 5%</span>
-            </label>
-          </p>
-          <p>
-            <label>
-              <input type="checkbox"  />
-              <span>Mid Risk - 7%</span>
-            </label>
-          </p>
-          <p>
-            <label>
-              <input type="checkbox" />
-              <span>Mid/High Risk - 9%</span>
-            </label>
-          </p>
-          <p>
-            <label>
-              <input type="checkbox" />
-              <span>High Risk - 10%</span>
-            </label>
-          </p>
+      <div class="row">
+        <form class="col s12" action="#">
+          <div class="row">
+            <div class="input-field inline">
+              <i class="material-icons prefix">attach_money</i>
+              <textarea id="textarea1" class="materialize-textarea"></textarea>
+              <label for="textarea1">Initial Investment</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field inline">
+              <i class="material-icons prefix">attach_money</i>
+              <textarea id="textarea1" class="materialize-textarea"></textarea>
+              <label for="textarea1">Monthly Contribution</label>
+            </div>
+          </div>
         </form>
       </div>
 
-     <div class="section no-pad-bot" id="index-banner">
+      <form action="#">
+        <p>
+          Saving
+        </p>
+        <p>
+          <label>
+            <input type="checkbox" />
+            <span>Low Interest Savings Account</span>
+          </label>
+        </p>
+        <p>
+          <label>
+            <input type="checkbox" />
+            <span>Cash</span>
+          </label>
+        </p>
+        <p>
+          Investing
+        </p>
+        <p>
+          <label>
+            <input type="checkbox" />
+            <span>Low Risk - 3%</span>
+          </label>
+        </p>
+        <p>
+          <label>
+            <input type="checkbox" />
+            <span>Mid/Low Risk - 5%</span>
+          </label>
+        </p>
+        <p>
+          <label>
+            <input type="checkbox" />
+            <span>Mid Risk - 7%</span>
+          </label>
+        </p>
+        <p>
+          <label>
+            <input type="checkbox" />
+            <span>Mid/High Risk - 9%</span>
+          </label>
+        </p>
+        <p>
+          <label>
+            <input type="checkbox" />
+            <span>High Risk - 10%</span>
+          </label>
+        </p>
+      </form>
+    </div>
+
+    <div class="section no-pad-bot" id="index-banner">
       <div class="container">
         <h1 class="header center orange-text">Graph goes here</h1>
-        </div>
-        </div>
-        <br><br>
+      </div>
+    </div>
+    <br><br>
 
     <footer class="page-footer orange">
       <div class="container">
@@ -244,12 +217,12 @@
       </div>
       <div class="footer-copyright">
         <div class="container">
-        <a class="orange-text text-lighten-3" href="#">Extra link</a>
+          <a class="orange-text text-lighten-3" href="#">Extra link</a>
         </div>
       </div>
     </footer>
-  
-  
+
+
     <!--  Scripts-->
     <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="js/materialize.js"></script>
@@ -258,5 +231,6 @@
 
 
     <script type="text/javascript" src="js/materialize.min.js"></script>
-  </body>
+</body>
+
 </html>
