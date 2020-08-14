@@ -249,7 +249,7 @@
 			var balances2 = [];
 			var index2 = 0;
 			while (balances2.length != 56) {
-				balances2[index2] = (1.4**index2).toFixed(2);
+				balances2[index2] = (1.12**index2).toFixed(2);
 				index2++;
 			}
 
@@ -264,7 +264,15 @@
 		                borderColor: 'rgb(55,95,65)',
 		                fill: false,
 		                data: balances,
-		            }]
+		                pointBackgroundColor: "rgb(75,115,85)",
+		            },
+		            {
+		            	label: "Value ($)",
+		            	borderColor: 'rgb(200,200,200)',
+		            	fill: false,
+		            	data: balances2,
+		            }
+		            ]
 		        },
 
 		        options: {
@@ -280,7 +288,7 @@
 
 		        	title: {
 		        	    	display: true,
-		        	    	text: 'Growth of Portfolio',
+		        	    	text: 'Growth of Investment',
 		        	    	fontSize: 22,
 		        	    	fontColor: 'black',
 		        	    	fontStyle: 'bold',
